@@ -8,10 +8,11 @@ import java.util.ArrayList;
 public class Panel extends JPanel{
 	Dimension PANEL_SIZE;
 	Rect rect;
-	int TILE_SIZE = 20;
+	//int TILE_SIZE = 20;
 	int row; 
 	int column;
 	ArrayList<Rect> grid;
+	Snake snake;
 
 	Panel(int w, int h){
 		this.PANEL_SIZE = new Dimension(w, h);
@@ -21,18 +22,20 @@ public class Panel extends JPanel{
 
 
 		//this.rect = new Rect(100, 100, 50, 50);
-		this.row = (int)h/TILE_SIZE;
-		this.column = (int)w/TILE_SIZE;
+		this.row = (int)h/Settings.TILE_SIZE;
+		this.column = (int)w/Settings.TILE_SIZE;
 		this.grid = new ArrayList<>();
 		for(int i = 0; i < row; i++){
 			for(int j = 0; j < column; j++){
-				Rect rect = new Rect(j*TILE_SIZE, i*TILE_SIZE, TILE_SIZE - 2, TILE_SIZE - 2);
+				Rect rect = new Rect(j*Settings.TILE_SIZE, i*Settings.TILE_SIZE, Settings.TILE_SIZE - 2, Settings.TILE_SIZE - 2);
 				grid.add(rect);
 			}
 		}
-	
+		this.snake = new Snake(Settings.TILE_SIZE*5, Settings.TILE_SIZE*2, Settings.TILE_SIZE, Settings.TILE_SIZE);
 
 	
+
+			
 	}
 
 	@Override
@@ -44,6 +47,7 @@ public class Panel extends JPanel{
 		for(int i = 0; i < grid.size(); i++){
 			this.grid.get(i).draw(g);
 		}
+		this.snake.draw(g);
 	}
 
 }
